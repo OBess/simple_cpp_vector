@@ -2,6 +2,8 @@
 #ifndef C_VECTOR_HPP
 #define C_VECTOR_HPP
 
+#pragma pack(push, 1)
+
 template <class T>
 class c_vector
 {
@@ -67,12 +69,17 @@ public:
       return *this;
    }
 
-   reference operator[](size_t pos) noexcept;
-
-   reference at(size_t pos);
+   reference operator[](size_t pos) noexcept
+   {
+      return m_store[pos];
+   }
 
    size_t size() const noexcept { return m_size; }
+   size_t capacity() const noexcept { return m_capacity; }
    bool empty() const noexcept { return m_size; }
+
+   reference front() noexcept { return m_store[0]; }
+   reference back() noexcept { return m_store[m_size - 1]; }
 
    void push_back(const T &value)
    {
@@ -108,8 +115,14 @@ public:
    }
 };
 
-// CTAD
+// CTAD idiom
 template <typename T>
 c_vector(std::initializer_list<T>) -> c_vector<T>;
+template <typename T>
+c_vector(const c_vector<T> &other) -> c_vector<T>;
+template <typename T>
+c_vector(c_vector<T> &&other) -> c_vector<T>;
+
+#pragma pack(pop)
 
 #endif //C_VECTOR_HPP
