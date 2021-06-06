@@ -16,7 +16,7 @@ DEBUG_MODE = Debug
 RELEASE_MODE = Release
 
 BUILD_MODE = $(DEBUG_MODE)
-AUTO_RUN = $(FALSE)
+AUTO_RUN = $(TRUE)
 
 # Flags for two build modes
 Release_FLAGS = -O3 -std=c++17 -s -DNDEBUG
