@@ -109,7 +109,7 @@ public:
 };
 
 // CTAD
-// template <typename T>
-// c_vector(std::initializer_list<T>) -> c_vector<T>;
+template <typename T>
+c_vector(std::initializer_list<T>) -> c_vector<T>;
 
 #endif //C_VECTOR_HPP
