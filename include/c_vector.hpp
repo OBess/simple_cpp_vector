@@ -37,6 +37,8 @@ public:
          m_store(nullptr)
    {
       m_store = new T[m_capacity];
+      for (auto &i : *this)
+         i = T();
    }
 
    explicit c_vector(const c_vector &other)
@@ -76,7 +78,7 @@ public:
 
    size_t size() const noexcept { return m_size; }
    size_t capacity() const noexcept { return m_capacity; }
-   bool empty() const noexcept { return m_size; }
+   bool empty() const noexcept { return m_size == 0; }
 
    reference front() noexcept { return m_store[0]; }
    reference back() noexcept { return m_store[m_size - 1]; }
@@ -90,13 +92,25 @@ public:
 
    void pop_back()
    {
-      --m_size;
+      m_size = empty() ? 0 : m_size - 1;
    }
 
    void resize(size_t count)
    {
       c_vector tmp(count);
-      std::copy(m_store, m_store + tmp.m_size, tmp.m_store);
+      std::copy(m_store,
+                m_store + (tmp.m_capacity > m_capacity ? m_capacity : tmp.m_capacity),
+                tmp.m_store);
+      tmp.m_size = count;
+      swap(*this, tmp);
+   }
+
+   void resize(size_t count, const T &value)
+   {
+      c_vector tmp(count);
+      std::copy(m_store,
+                m_store + (tmp.m_capacity > m_capacity ? m_capacity : tmp.m_capacity),
+                tmp.m_store);
       swap(*this, tmp);
    }
 
