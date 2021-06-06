@@ -9,14 +9,14 @@ TRUE = true
 FALSE = false
 
 # Chosen compiler
-CC = g++
+CC = gcc
 
 # Chosen modes
 DEBUG_MODE = Debug
 RELEASE_MODE = Release
 
-BUILD_MODE = $(RELEASE_MODE)
-AUTO_RUN = $(TRUE)
+BUILD_MODE = $(DEBUG_MODE)
+AUTO_RUN = $(FALSE)
 
 # Flags for two build modes
 Release_FLAGS = -O3 -s -DNDEBUG
