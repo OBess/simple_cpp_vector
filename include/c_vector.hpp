@@ -32,13 +32,23 @@ public:
    }
 
    explicit c_vector(size_t count)
-       : m_size(0),
+       : m_size(count),
          m_capacity(m_space * (static_cast<size_t>(count / m_space) + 1)),
          m_store(nullptr)
    {
       m_store = new T[m_capacity];
       for (auto &i : *this)
          i = T();
+   }
+
+   explicit c_vector(size_t count, const T &value)
+       : m_size(count),
+         m_capacity(m_space * (static_cast<size_t>(count / m_space) + 1)),
+         m_store(nullptr)
+   {
+      m_store = new T[m_capacity];
+      for (auto &i : *this)
+         i = value;
    }
 
    explicit c_vector(const c_vector &other)
@@ -99,17 +109,16 @@ public:
    {
       c_vector tmp(count);
       std::copy(m_store,
-                m_store + (tmp.m_capacity > m_capacity ? m_capacity : tmp.m_capacity),
+                m_store + (count > m_size ? m_size : count),
                 tmp.m_store);
-      tmp.m_size = count;
       swap(*this, tmp);
    }
 
    void resize(size_t count, const T &value)
    {
-      c_vector tmp(count);
+      c_vector tmp(count, value);
       std::copy(m_store,
-                m_store + (tmp.m_capacity > m_capacity ? m_capacity : tmp.m_capacity),
+                m_store + (count > m_size ? m_size : count),
                 tmp.m_store);
       swap(*this, tmp);
    }
