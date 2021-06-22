@@ -60,9 +60,5 @@ int main(int argc, char const *argv[])
       assert(c.back() == 0);
    }
 
-   std::cout << "\033[;32m"
-             << "Tests passed successfully!"
-             << "\033[0m" << std::endl;
-
    return EXIT_SUCCESS;
 }
