@@ -1,6 +1,6 @@
 # Created by Dima Sushchenko
 # Creation Date: 01.06.2021
-# Last Update: 16.06.2021
+# Last Update: 26.06.2021
 # Makefile to build a project from .cpp files.
 #
 
@@ -20,7 +20,7 @@ AUTO_RUN = $(FALSE)
 
 # Flags for two build modes
 Release_FLAGS = -O3 -std=c++17 -s -DNDEBUG
-Debug_FLAGS = -O0 -std=c++17 -g -Wall
+Debug_FLAGS = -O0 -std=c++17 -g -lgtest -lpthread -Wall
 
 # EXECUTABLE - main filename
 # SOURCES - returns list of all .cpp files
@@ -41,7 +41,7 @@ endif
 build:
 	@mkdir -p $(BUILD_MODE)
 	$(CXX) $($(BUILD_MODE)_FLAGS) $(EXECUTABLE).cpp $(SOURCES) -o $(BUILD_MODE)/$(EXECUTABLE)
-	@echo "makefile: \033[;32mBuild successful!\033[0m"
+	@echo "makefile: \033[;32mBuild have done!\033[0m"
 
 # Run program after build
 run:
@@ -51,7 +51,7 @@ test:
 	@mkdir -p $(TEST_FOLDER_NAME)
 	$(CXX) $($(DEBUG_MODE)_FLAGS) $(TEST).cpp $(SOURCES) -o $(TEST_FOLDER_NAME)/$(TEST)
 	@$(TEST_FOLDER_NAME)/$(TEST)
-	@echo "makefile: \033[;32mTesting successfully!\033[0m"
+	@echo "makefile: \033[;32mTesting have done!\033[0m"
 
 test_gdb:
 	@gdb $(TEST_FOLDER_NAME)/$(TEST)
