@@ -20,7 +20,7 @@ AUTO_RUN = $(FALSE)
 
 # Flags for two build modes
 Release_FLAGS = -O3 -std=c++17 -s -DNDEBUG
-Debug_FLAGS = -O0 -std=c++17 -g -lgtest -lpthread -Wall
+Debug_FLAGS = -O0 -std=c++17 -g -lpthread -Wall
 
 # EXECUTABLE - main filename
 # SOURCES - returns list of all .cpp files
