@@ -4,6 +4,9 @@
 
 #pragma pack(push, 1)
 
+// C++
+#include <iostream>
+
 template <class T>
 class c_vector
 {
